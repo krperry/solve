@@ -78,7 +78,16 @@ def isolate_variable(v, f):
             new_function[1][-1][0] = '-' if exp[0] == '+' else '+'
     if new_function[0] == []:
         return []
-    print (f"ken: {new_function[0][0][0]}")
+    if new_function[0][0][0] == '-':
+        new_function[0][0][0] = '+'
+        for index, exp in enumerate(new_function[1]):
+            new_function[1][index][0] = '-' if  new_function[1][index][0] == '+' else '+'  
+    if new_function[0][0][1] != '1':
+        value = int(new_function[0][0][1])
+        new_function[0][0][1] = '1'
+        for index, exp in enumerate(new_function[1]):
+            #new_function[1][index][1] = str(float(new_function[1][index][1])/float(value)   )
+            new_function[1][index][1] = f"({new_function[1][index][1]}/{str(value)})"
     return new_function        
     
 def create_isolated_functions(parsed_functions):
